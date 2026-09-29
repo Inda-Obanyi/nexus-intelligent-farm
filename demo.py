@@ -15,6 +15,7 @@ def main() -> None:
     result = runner.run()
 
     records = result["memory"]
+    decision_intelligence = result["decision_intelligence"]
     experiences = runner.experience_store.all()
 
     effect_counts = Counter(
@@ -85,6 +86,16 @@ def main() -> None:
         for record in successful_harvests
     )
 
+    # Select a representative decision trace for the demo.
+    demo_decision = next(
+        (
+            item
+            for item in decision_intelligence
+            if item.get("decision_name") == "PLANT_WHEAT"
+        ),
+        decision_intelligence[0],
+    )
+
     print("=" * 78)
     print("NEXUS — INTELLIGENT FARM DECISION & AUTONOMOUS MANAGEMENT SYSTEM")
     print("=" * 78)
@@ -96,6 +107,45 @@ def main() -> None:
     print("Seed:                  101")
     print("Decision records:      ", len(records))
     print("Experiences recorded:  ", len(experiences))
+
+    print("\nLIVE DECISION TRACE")
+    print("-" * 78)
+    print(f"Step:                  {demo_decision['step']}")
+    print(f"Decision:              {demo_decision['decision_name']}")
+    print(f"Action:                {demo_decision['decision_action']}")
+    print(f"Score:                 {demo_decision['decision_score']}")
+    print(f"Confidence:            {demo_decision['confidence']}")
+    print(f"Reason:                {demo_decision['decision_reason']}")
+    print(f"Runner-up:             {demo_decision['runner_up']}")
+    print(f"Runner-up score:       {demo_decision['runner_up_score']}")
+    print(f"Expected effect:       {demo_decision['expected_effect']}")
+    print(f"Observed effect:       {demo_decision['observed_effect']}")
+    print(f"Effect verification:   {demo_decision['effect_match']}")
+
+    evidence = demo_decision["evidence"]
+
+    print("\nSTATE TRANSITION")
+    print("-" * 78)
+    print(
+        f"Money:                 "
+        f"{evidence['money_before']:.0f} → "
+        f"{evidence['money_after']:.0f}"
+    )
+    print(
+        f"Wheat seed:            "
+        f"{evidence['seeds_before']['WHEAT']} → "
+        f"{evidence['seeds_after']['WHEAT']}"
+    )
+    print(
+        f"Crop count:            "
+        f"{evidence['crop_count_before']} → "
+        f"{evidence['crop_count_after']}"
+    )
+    print(
+        f"Target crop:           "
+        f"{evidence['target_crop_before']} → "
+        f"{evidence['target_crop_after']['crop']}"
+    )
 
     print("\nEXPERIENCE QUALITY")
     print("-" * 78)
