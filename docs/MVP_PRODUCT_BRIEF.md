@@ -115,7 +115,7 @@ A reproducible 720-step episode using seed 101 produced:
 
 Automated regression baseline:
 
-**103 tests passed**
+**324 tests passed**
 
 ## Decision Safety / Architectural Boundary
 
@@ -273,7 +273,7 @@ Extend toward external farm integrations, field systems, sensors, and operationa
 - [x] Historical evidence interpretation
 - [x] Decision invariance validation
 - [x] 720-step reproducible demonstration
-- [x] 103-test regression baseline
+- [x] 324-test regression baseline
 - [ ] Repository packaging finalized
 - [ ] Application materials finalized
 - [ ] Real-farm validation documented where available
