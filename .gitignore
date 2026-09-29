@@ -1,0 +1,22 @@
+.venv/
+.venv311/
+__pycache__/
+**/__pycache__/
+*.pyc
+.pytest_cache/
+
+*.log
+*.txt
+
+*.backup
+*.before-clean-replacement
+*.pre_execution_intent
+*.tmp
+*.bak
+
+0
+PY
+
+# Keep dependency manifests versioned
+!requirements.txt
+!requirements-dev.txt
